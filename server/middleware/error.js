@@ -7,7 +7,7 @@ function handleError(error, req, res, next) {
   res.status(status);
   const message = STATUS_CODES[status];
   if (process.env.NODE_ENV === "production") {
-    res.send({ error: message });
+    res.send({ error: message, info: error.message });
   } else {
     const stackArray = error.stack.split("\n").map((line) => line.trim());
     res.send({
