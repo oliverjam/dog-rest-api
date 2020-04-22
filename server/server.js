@@ -15,7 +15,12 @@ server.use(logger);
 
 server.get("/v1/dogs", dogs.getAll);
 server.get("/v1/dogs/:id", dogs.get);
-server.post("/v1/dogs/", verifyUser, validate(["name", "breed"]), dogs.post);
+server.post(
+  "/v1/dogs/",
+  verifyUser,
+  validate(["name", "breed", "image"]),
+  dogs.post
+);
 server.put("/v1/dogs/:id", verifyUser, validate(), dogs.put);
 server.delete("/v1/dogs/:id", verifyUser, dogs.del);
 

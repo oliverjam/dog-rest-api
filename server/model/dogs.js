@@ -2,13 +2,13 @@ const db = require("../database/connection");
 
 function getAllDogs() {
   return db
-    .query(`SELECT id, name, breed, owner FROM dogs`)
+    .query(`SELECT id, name, breed, image, owner FROM dogs`)
     .then((res) => res.rows);
 }
 
 function getDog(id) {
   return db
-    .query(`SELECT id, name, breed, owner FROM dogs WHERE id = $1`, [id])
+    .query(`SELECT id, name, breed, image, owner FROM dogs WHERE id = $1`, [id])
     .then((res) => {
       const dog = res.rows[0];
       if (!dog) {
@@ -21,25 +21,25 @@ function getDog(id) {
 }
 
 function createDog(dog) {
-  const { name, breed, owner } = dog;
+  const { name, breed, image, owner } = dog;
   return db
     .query(
       `
-      INSERT INTO dogs(name, breed, owner)
-      VALUES ($1, $2, $3)
-      RETURNING id, name, breed, owner
+      INSERT INTO dogs(name, breed, image, owner)
+      VALUES ($1, $2, $3, $4)
+      RETURNING id, name, breed, image, owner
     `,
-      [name, breed, owner]
+      [name, breed, image, owner]
     )
     .then((res) => res.rows);
 }
 
 function updateDog(id, newDog) {
-  const { name, breed } = newDog;
+  const { name, breed, image } = newDog;
   return db
     .query(
-      `UPDATE dogs SET name = COALESCE($2, name), breed = COALESCE($3, breed) WHERE id = $1 RETURNING id, name, breed, owner`,
-      [id, name, breed]
+      `UPDATE dogs SET name = COALESCE($2, name), breed = COALESCE($3, breed), image = COALESCE($3, image) WHERE id = $1 RETURNING id, name, breed, image, owner`,
+      [id, name, breed, image]
     )
     .then((res) => res.rows[0]);
 }
