@@ -31,11 +31,31 @@ Current version is `v1`, so make sure that is in all URLs. The base URL is `http
 | `/dogs/:id` | `PUT`    | `{ "name": "Pongo2" }`                      | `{ "id": 2, "name": "Pongo2", "breed": "Dalmation", "owner": 1 }`      |
 | `/dogs/:id` | `DELETE` | n/a                                         | n/a                                                                    |
 
-#### Authentication
+### Authentication
 
 All non-GET `/dogs` endpoints require a bearer token sent in the `authorization` header. For example `Bearer ey6sjbnafdn.asbdabkjn`. The token should be the JWT returned from the `POST /users` and `POST /users/login` endpoints.
 
 Updating or deleting a dog also requires that the authenticated user be the owner of that dog (i.e. the dog's `owner` ID matches the user's `id`).
+
+### Schema
+
+#### Users
+
+| Column   | Type         | Constraints |
+| -------- | ------------ | ----------- |
+| id       | SERIAL       | PRIMARY KEY |
+| email    | VARCHAR(255) | NOT NULL    |
+| name     | VARCHAR(255) |
+| password | VARCHAR(255) |
+
+#### Dogs
+
+| Column | Type         | Constraints          |
+| ------ | ------------ | -------------------- |
+| id     | SERIAL       | PRIMARY KEY          |
+| name   | VARCHAR(255) |
+| breed  | VARCHAR(255) |
+| owner  | INTEGER      | REFERENCES users(id) |
 
 ## Postman
 
