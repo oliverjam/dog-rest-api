@@ -21,7 +21,7 @@ function post(req, res, next) {
   model
     .createUser(userData)
     .then((user) => {
-      const token = jwt.sign({ user: user.id }, SECRET, { expiresIn: "1h" });
+      const token = jwt.sign({ user: user.id }, SECRET, { expiresIn: "24h" });
       user.access_token = token;
       res.status(201).send(user);
     })
@@ -74,7 +74,7 @@ function login(req, res, next) {
         error.status = 401;
         next(error);
       } else {
-        const token = jwt.sign({ user: user.id }, SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ user: user.id }, SECRET, { expiresIn: "7d" });
         res.status(201).send({ access_token: token, id: user.id });
       }
     })
