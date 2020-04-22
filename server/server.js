@@ -5,6 +5,7 @@ const users = require("./handlers/users");
 const logger = require("./middleware/logger");
 const verifyUser = require("./middleware/auth");
 const handleError = require("./middleware/error");
+const validate = require("./middleware/validate");
 
 const server = express();
 
@@ -14,15 +15,15 @@ server.use(logger);
 
 server.get("/v1/dogs", dogs.getAll);
 server.get("/v1/dogs/:id", dogs.get);
-server.post("/v1/dogs/", verifyUser, dogs.post);
-server.put("/v1/dogs/:id", verifyUser, dogs.put);
+server.post("/v1/dogs/", verifyUser, validate(["name", "breed"]), dogs.post);
+server.put("/v1/dogs/:id", verifyUser, validate(), dogs.put);
 server.delete("/v1/dogs/:id", verifyUser, dogs.del);
 
 server.get("/v1/users/:id", users.get);
-server.post("/v1/users", users.post);
-server.put("/v1/users/:id", users.put);
+server.post("/v1/users", validate(["email", "password", "name"]), users.post);
+server.put("/v1/users/:id", validate(), users.put);
 server.delete("/v1/users/:id", users.del);
-server.post("/v1/users/login", users.login);
+server.post("/v1/users/login", validate(["username", "password"]), users.login);
 
 server.use((req, res, next) => {
   const error = new Error("Route not found");
