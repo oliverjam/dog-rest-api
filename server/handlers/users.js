@@ -4,7 +4,6 @@ const model = require("../model/users");
 
 dotenv.config();
 const SECRET = process.env.JWT_SECRET;
-console.log(SECRET);
 
 function get(req, res, next) {
   const id = req.params.id;
@@ -71,9 +70,6 @@ function login(req, res, next) {
     .getUser(email)
     .then((user) => {
       if (password !== user.password) {
-        console.log({ email });
-        console.log({ password });
-        console.log({ userPassword: user.password });
         const error = new Error("Unauthorized");
         error.status = 401;
         next(error);

@@ -35,12 +35,9 @@ function put(req, res, next) {
   const dogId = req.params.id;
   const userId = req.user.id;
   const newDog = req.body;
-  console.log({ dogId });
-  console.log(newDog);
   model
     .getDog(dogId)
     .then((dog) => {
-      console.log(dog);
       if (dog.owner !== userId) {
         const error = new Error("Unauthorized");
         error.status = 401;
