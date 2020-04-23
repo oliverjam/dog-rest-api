@@ -28,7 +28,7 @@ server.get("/v1/users/:id", users.get);
 server.post("/v1/users", validate(["email", "password", "name"]), users.post);
 server.put("/v1/users/:id", validate(), users.put);
 server.delete("/v1/users/:id", users.del);
-server.post("/v1/users/login", validate(["username", "password"]), users.login);
+server.post("/v1/users/login", validate(["email", "password"]), users.login);
 
 server.use((req, res, next) => {
   const error = new Error("Route not found");
