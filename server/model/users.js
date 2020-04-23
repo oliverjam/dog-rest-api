@@ -11,7 +11,7 @@ function createUser(user) {
     `,
       [email, name, password]
     )
-    .then((res) => res.rows);
+    .then((res) => res.rows[0]);
 }
 
 function getUser(email) {
