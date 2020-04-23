@@ -26,8 +26,15 @@ function getUserById(id) {
     .then((res) => res.rows[0]);
 }
 
+function getUserPassword(email) {
+  return db
+    .query(`SELECT id, password FROM users WHERE email = $1`, [email])
+    .then((res) => res.rows[0]);
+}
+
 module.exports = {
   createUser,
   getUser,
   getUserById,
+  getUserPassword,
 };

@@ -67,7 +67,7 @@ function login(req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
   model
-    .getUser(email)
+    .getUserPassword(email)
     .then((user) => {
       if (password !== user.password) {
         const error = new Error("Unauthorized");
