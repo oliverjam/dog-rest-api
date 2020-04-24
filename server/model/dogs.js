@@ -38,7 +38,7 @@ function updateDog(id, newDog) {
   const { name, breed, image } = newDog;
   return db
     .query(
-      `UPDATE dogs SET name = COALESCE($2, name), breed = COALESCE($3, breed), image = COALESCE($3, image) WHERE id = $1 RETURNING id, name, breed, image, owner`,
+      `UPDATE dogs SET name = COALESCE($2, name), breed = COALESCE($3, breed), image = COALESCE($4, image) WHERE id = $1 RETURNING id, name, breed, image, owner`,
       [id, name, breed, image]
     )
     .then((res) => res.rows[0]);
