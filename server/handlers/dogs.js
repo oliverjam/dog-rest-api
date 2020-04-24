@@ -43,9 +43,12 @@ function put(req, res, next) {
         error.status = 401;
         next(error);
       } else {
-        model.updateDog(dogId, newDog).then((dog) => {
-          res.status(200).send(dog);
-        });
+        model
+          .updateDog(dogId, newDog)
+          .then((dog) => {
+            res.status(200).send(dog);
+          })
+          .catch(next);
       }
     })
     .catch(next);
