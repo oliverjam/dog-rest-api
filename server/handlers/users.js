@@ -75,7 +75,14 @@ function login(req, res, next) {
         next(error);
       } else {
         const token = jwt.sign({ user: user.id }, SECRET, { expiresIn: "7d" });
-        res.status(201).send({ access_token: token, id: user.id });
+        res
+          .status(201)
+          .send({
+            access_token: token,
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          });
       }
     })
     .catch(next);
