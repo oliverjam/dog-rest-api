@@ -36,7 +36,7 @@ Create a new user.
 ##### Example request
 
 ```json
-{ "email: "o@o.com", "name": "oli", "password": "123" }
+{ "email": "o@o.com", "name": "oli", "password": "123" }
 ```
 
 ##### Example response
@@ -95,7 +95,7 @@ Fetch a dog by its ID.
 
 Add a new dog. Owner field will be set to the ID of the authenticated user.
 
-##### Example request
+##### Example request
 
 ```json
 { "name": "Pongo", "breed": "Dalmation" }
@@ -113,7 +113,7 @@ Add a new dog. Owner field will be set to the ID of the authenticated user.
 
 Update a dog. The authenticated user must be the owner of the dog.
 
-##### Example request
+##### Example request
 
 ```json
 { "name": "Pongo2" }
