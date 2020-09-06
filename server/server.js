@@ -19,8 +19,8 @@ server.post("/v1/dogs/", verifyUser, validate(["name", "breed"]), dogs.post);
 server.put("/v1/dogs/:id", verifyUser, validate(), dogs.put);
 server.delete("/v1/dogs/:id", verifyUser, dogs.del);
 
-server.get("/v1/users/:id", users.get);
 server.get("/v1/users/me", verifyUser, users.getByToken);
+server.get("/v1/users/:id", users.get);
 server.post("/v1/users", validate(["email", "password", "name"]), users.post);
 server.put("/v1/users/:id", verifyUser, validate(), users.put);
 server.delete("/v1/users/:id", verifyUser, users.del);
