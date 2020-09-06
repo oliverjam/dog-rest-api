@@ -67,7 +67,7 @@ function login(req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
   model
-    .getUserPassword(email)
+    .getUserWithPassword(email)
     .then((user) => {
       if (password !== user.password) {
         const error = new Error("Unauthorized");
@@ -75,14 +75,12 @@ function login(req, res, next) {
         next(error);
       } else {
         const token = jwt.sign({ user: user.id }, SECRET, { expiresIn: "7d" });
-        res
-          .status(201)
-          .send({
-            access_token: token,
-            id: user.id,
-            name: user.name,
-            email: user.email,
-          });
+        res.status(201).send({
+          access_token: token,
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        });
       }
     })
     .catch(next);
