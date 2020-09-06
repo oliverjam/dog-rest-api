@@ -20,9 +20,10 @@ server.put("/v1/dogs/:id", verifyUser, validate(), dogs.put);
 server.delete("/v1/dogs/:id", verifyUser, dogs.del);
 
 server.get("/v1/users/:id", users.get);
+server.get("/v1/users/me", verifyUser, users.getByToken);
 server.post("/v1/users", validate(["email", "password", "name"]), users.post);
-server.put("/v1/users/:id", validate(), users.put);
-server.delete("/v1/users/:id", users.del);
+server.put("/v1/users/:id", verifyUser, validate(), users.put);
+server.delete("/v1/users/:id", verifyUser, users.del);
 server.post("/v1/users/login", validate(["email", "password"]), users.login);
 
 server.use((req, res, next) => {

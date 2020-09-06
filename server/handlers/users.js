@@ -16,6 +16,17 @@ function get(req, res, next) {
     .catch(next);
 }
 
+function getByToken(req, res, next) {
+  const id = req.user.id;
+  model.getUserById(id).then((user) => {
+    res.send({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
+  });
+}
+
 function post(req, res, next) {
   const userData = req.body;
   model
@@ -86,4 +97,4 @@ function login(req, res, next) {
     .catch(next);
 }
 
-module.exports = { get, post, put, del, login };
+module.exports = { get, getByToken, post, put, del, login };

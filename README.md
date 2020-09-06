@@ -18,6 +18,7 @@ Current version is `v1`, so make sure that is in all URLs. The base URL is `http
 | Path           | Method | Body                                                      | Example response                                                            |
 | -------------- | ------ | --------------------------------------------------------- | --------------------------------------------------------------------------- |
 | `/users/:id`   | `GET`  | n/a                                                       | `{ "id": 1, "email": "o@o.com", "name": "oli" }`                            |
+| `/users/me`    | `GET`  | n/a                                                       | `{ "id": 1, "email": "o@o.com", "name": "oli" }`                            |
 | `/users/`      | `POST` | `{ "email: "o@o.com", "name": "oli", "password": "123" }` | `{ "id": 1, "email": "o@o.com", "name": "oli", "access_token": "ey5a..." }` |
 | `/users/login` | `POST` | `{ "email": "o@o.com", "password": "123" }`               | `{ "id": 1, "access_token": "ey5a..." }`                                    |
 
