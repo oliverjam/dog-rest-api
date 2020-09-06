@@ -15,22 +15,121 @@ Current version is `v1`, so make sure that is in all URLs. The base URL is `http
 
 ### Users
 
-| Path           | Method | Body                                                      | Example response                                                            |
-| -------------- | ------ | --------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `/users/:id`   | `GET`  | n/a                                                       | `{ "id": 1, "email": "o@o.com", "name": "oli" }`                            |
-| `/users/me`    | `GET`  | n/a                                                       | `{ "id": 1, "email": "o@o.com", "name": "oli" }`                            |
-| `/users/`      | `POST` | `{ "email: "o@o.com", "name": "oli", "password": "123" }` | `{ "id": 1, "email": "o@o.com", "name": "oli", "access_token": "ey5a..." }` |
-| `/users/login` | `POST` | `{ "email": "o@o.com", "password": "123" }`               | `{ "id": 1, "access_token": "ey5a..." }`                                    |
+#### `GET /users/me/`
+
+- [x] Authenticated
+
+Fetch the logged in user by the access token sent in the `authorization` header.
+
+#### `GET /users/:id/`
+
+- [ ] Authenticated
+
+Fetch a user by their ID.
+
+#### `POST /users/`
+
+- [ ] Authenticated
+
+Create a new user.
+
+##### Example request
+
+```json
+{ "email: "o@o.com", "name": "oli", "password": "123" }
+```
+
+##### Example response
+
+```json
+{ "id": 1, "email": "o@o.com", "name": "oli", "access_token": "ey5a..." }
+```
+
+#### `POST /users/login/`
+
+- [ ] Authenticated
+
+Exchange an email and password for an access_token, which should be sent to authenticate future requests. Tokens expire after 7 days.
+
+##### Example request
+
+```json
+{ "email": "o@o.com", "password": "123" }
+```
+
+##### Example response
+
+```json
+{ "id": 1, "email": "o@o.com", "name": "oli", "access_token": "ey5a..." }
+```
 
 ### Dogs
 
-| Path        | Method   | Body                                        | Example response                                                       |
-| ----------- | -------- | ------------------------------------------- | ---------------------------------------------------------------------- |
-| `/dogs/`    | `GET`    | n/a                                         | `[{ "id": 1, "name": "Luna", "breed": "Cocker Spaniel", "owner": 1 }]` |
-| `/dogs/:id` | `GET`    | n/a                                         | `{ "id": 1, "name": "Luna", "breed": "Cocker Spaniel", "owner": 1 }`   |
-| `/dogs/`    | `POST`   | `{ "name": "Pongo", "breed": "Dalmation" }` | `{ "id": 2, "name": "Pongo", "breed": "Dalmation", "owner": 1 }`       |
-| `/dogs/:id` | `PUT`    | `{ "name": "Pongo2" }`                      | `{ "id": 2, "name": "Pongo2", "breed": "Dalmation", "owner": 1 }`      |
-| `/dogs/:id` | `DELETE` | n/a                                         | n/a                                                                    |
+#### `GET /dogs//`
+
+- [ ] Authenticated
+
+Fetch every dog in the database.
+
+##### Example response
+
+```json
+[{ "id": 1, "name": "Luna", "breed": "Cocker Spaniel", "owner": 1 }]
+```
+
+#### `GET /dogs/:id/`
+
+- [ ] Authenticated
+
+Fetch a dog by its ID.
+
+##### Example response
+
+```json
+{ "id": 1, "name": "Luna", "breed": "Cocker Spaniel", "owner": 1 }
+```
+
+#### `POST /dogs/`
+
+- [x] Authenticated
+
+Add a new dog. Owner field will be set to the ID of the authenticated user.
+
+##### Example request
+
+```json
+{ "name": "Pongo", "breed": "Dalmation" }
+```
+
+##### Example response
+
+```json
+{ "id": 2, "name": "Pongo", "breed": "Dalmation", "owner": 1 }
+```
+
+#### `PUT /dogs/`
+
+- [x] Authenticated
+
+Update a dog. The authenticated user must be the owner of the dog.
+
+##### Example request
+
+```json
+{ "name": "Pongo2" }
+```
+
+##### Example response
+
+```json
+{ "id": 2, "name": "Pongo2", "breed": "Dalmation", "owner": 1 }
+```
+
+#### `DELETE /dogs/`
+
+- [x] Authenticated
+
+Delete a dog. The authenticated user must be the owner of the dog.
 
 ### Authentication
 

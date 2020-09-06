@@ -18,13 +18,16 @@ function get(req, res, next) {
 
 function getByToken(req, res, next) {
   const id = req.user.id;
-  model.getUserById(id).then((user) => {
-    res.send({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    });
-  });
+  model
+    .getUserById(id)
+    .then((user) => {
+      res.send({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      });
+    })
+    .catch(next);
 }
 
 function post(req, res, next) {
