@@ -21,7 +21,7 @@ Here's an example of an authenticated request using `fetch` in JavaScript:
 const token = "ey5a..."
 fetch("https://dogs-rest.herokuapp.com/v1/users/me", {
   headers: {
-    "content-type": "applications/json",
+    "content-type": "application/json",
     authorization: `Bearer ${token}`
 }).then(user => console.log(user))
 ```
