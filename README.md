@@ -18,12 +18,13 @@ All endpoints marked with "Authenticated" require a bearer token sent in the `au
 Here's an example of an authenticated request using `fetch` in JavaScript:
 
 ```js
-const token = "ey5a..."
+const token = "ey5a...";
 fetch("https://dogs-rest.herokuapp.com/v1/users/me", {
   headers: {
     "content-type": "application/json",
-    authorization: `Bearer ${token}`
-}).then(user => console.log(user))
+    authorization: `Bearer ${token}`,
+  },
+}).then((user) => console.log(user));
 ```
 
 ### Users
